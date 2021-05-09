@@ -1,0 +1,36 @@
+control:
+  build: ./centos
+  hostname: control
+  #privileged: true
+  links:
+    - lb01
+    - app01
+  # volumes:
+  #   - "./ansible:/home/ansible/ansible-code"
+  #   - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  # ports:
+  #   - "8000:80"
+
+lb01:
+  build: ./centos
+  hostname: lb01
+  #privileged: true
+  links:
+    - app01
+  # volumes:
+  #   - "./ansible:/home/ansible/ansible-code"
+  #   - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  # ports:
+  #   - "8001:80"
+
+app01:
+  build: ./centos
+  hostname: app01
+  #privileged: true
+  # volumes:
+  #   - "./ansible:/home/ansible/ansible-code"
+  #   - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  # ports:
+  #   - "8081:80"
+  cap_add:
+    - NET_ADMIN

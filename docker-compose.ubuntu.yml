@@ -1,0 +1,20 @@
+control:
+  build: ./ubuntu
+  hostname: control
+  links:
+    - lb01
+    - app01
+  volumes:
+    - "./ansible:/home/ansible/ansible-code"
+
+lb01:
+  build: ./ubuntu
+  hostname: lb01
+  links:
+    - app01
+
+app01:
+  build: ./ubuntu
+  hostname: app01
+  cap_add:
+    - NET_ADMIN
